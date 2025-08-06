@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herbs</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <<link href="https://fonts.googleapis.com/css2?family=Bellota:wght@700&family=Coiny&family=Modak&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href ="/styles/main.css">
+</head>
+
+<body class="body">
+    <main>
+        <h1 class="modak-regular">My Herbs Town 🌿</h1>
+        <div class="buttons">
+        <% herbs.forEach((herb, index) => { %>
+            <a href="/herbs/<%= index+1 %>" class="button">
+                <img src="/uploads/<%= herb.path%>" alt="<%=herb.name%>">
+            </a>
+        <% }) %>
+        <svg class="me-4" width="40" height="32" aria-hidden="true"></svg>  
+        <a href="/add" class="button add mt-5 ml-5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
+            </svg>
+        </a>
+        </div>
+        <h2 class="herbsContainer coiny-regular">Pick The Herbs</h2>
+        <div class="herbsContainer bellota-bold">
+            🌿 Herbs are the leafy green parts of plants used for:<br>
+            🍔Flavoring food
+            💊Medicinal purposes 
+            🍋Aromatic uses<br>
+            🍃Usually soft, can be fresh or dried.
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous">
+        </script>
+<%- include('./partials/footer.ejs') %>

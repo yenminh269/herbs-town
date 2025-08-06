@@ -1,0 +1,27 @@
+<%- include("./partials/header.ejs")%>
+    <div class="content herbsContainer">
+        <form action="/upload" method="post" class="was-validated" enctype="multipart/form-data">
+            <div class="form-floating mb-3">
+                <input type="text" name="name" id="title" class="form-control" placeholder="Required Characteristic:"required>
+                <label for="title">Name:</label>
+                <div class="invalid-feedback">Please provide the herb name in the textarea.</div>
+            </div>
+            <div class="mb-3">
+                <input type="file" name="image" class="form-control" aria-label="file example" required>
+                <div class="invalid-feedback"> Please provide a photo of the herb.</div>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-success">Add A New Herb</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous">
+    </script>
+    <script>
+        document.querySelector("a.nav-link.active").hidden = true;
+    </script>
+ <%- include("./partials/footer.ejs") %>
+</body>
+
+</html>

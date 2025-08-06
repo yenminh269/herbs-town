@@ -1,0 +1,84 @@
+<%- include("./partials/header.ejs")%>
+    <div class="content">
+        <img class="mb-3" src="/uploads/<%= itemSelected.path%>" width="400px" alt="<%=itemSelected.name%>">
+        <div class="herbsContainer">
+            <h2><%= itemSelected.name %></h2>
+            <% if(locals.edit == null|| locals.isBlank) { %>
+                <% if(!locals.isBlank) {%> 
+                    <% itemSelected.traits.forEach((trait, index) => { %>
+                        <div class="card text-center my-3">
+                            <div class="card-header">
+                                <h5 class="card-title"><%= trait.title%></h5>
+                            </div>
+                            <div class="card-body">
+                                <p><%= trait.content %></p>
+                                <a href="/edit/<%= itemSelected.id %>/<%= index%>" class="btn btn-outline-primary">Edit</a>
+                                <button onclick="showDelete('<%=index%>')" type="button" class="btn btn-outline-danger">
+                                    Delete
+                                </button>
+                                <div hidden="true" class="card card-body" id="<%= index%>">
+                                    Are you sure you want to delete this trait?
+                                    <div class="nav  justify-content-center">
+                                        <a href ="/posts/delete/<%= itemSelected.id %>/<%= index%>" class="btn btn-success">Yes</a>
+                                        <button onclick="hideDelete('<%=index%>')" class="btn btn-danger">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer text-body-secondary">
+                                <small><%= trait.day%></small>
+                            </div>
+                        </div>
+                    <% }) %>
+                    <a href="/add/<%= itemSelected.id %>" class="btn btn-outline-info">Add Characteristic</a>
+                <% } else {%>
+                    <a href="/add/<%= itemSelected %>" class="btn btn-outline-info">Add Characteristic</a>
+                <% } %>
+                <a href="/delete/<%= itemSelected.id%>/<%= itemSelected.path%> %>" type="button" class="btn btn-outline-danger">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"></path>
+                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"></path>
+                    </svg> Delete herb
+                </a>
+            <% } else if(locals.edit == true) { %>
+                <form action="/api/posts/<%= itemSelected.id%>/<%=index%>" method="post">
+                    <h3>EDIT:</h3>
+                    <div class="form-floating mb-3 mx-3">
+                        <input type="text" class="form-control" id="title" name="title" value="<%= itemSelected.traits[index].title %>">
+                        <label for="title">Characteristic:</label>
+                    </div>
+                    <div class="form-floating mb-3 mx-3">
+                        <textarea class="form-control" style="height: 100px" name="content" id="content"><%= itemSelected.traits[index].content %></textarea>
+                        <label for="content">Content:</label>
+                    </div>
+                    <button type="submit" class="btn btn-outline-success"><%= submit %></button>
+                </form>
+            <% } else{ %>
+                <form action="/posts/<%= itemSelected.id %>&<%= itemSelected.traits.length %>" method="post">
+                    <h3>ADD INFO:</h3>
+                    <div class="form-floating mb-3 mx-3">
+                        <input class="form-control" required type="text" id="title" name="title" placeholder="Title">
+                        <label for="title">Characteristic:</label>
+                    </div>
+                    <div class="form-floating mb-3 mx-3">
+                        <textarea class="form-control" required style="height: 100px" id="content" name="content" placeholder="Content"></textarea>
+                        <label for="content">Content:</label>
+                    </div>
+                    <button type="submit" class="btn btn-outline-success"><%= submit %></button>
+                </form>
+            <% } %>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous">
+    </script>
+    <script>
+        function showDelete(index){
+            document.getElementById(`${parseInt(index)}`).hidden = false;
+        }
+        function hideDelete(index){
+            document.getElementById(`${parseInt(index)}`).hidden = true;
+        }
+    </script>
+    <%- include("./partials/footer.ejs") %>
+</body>
+
+</html>
