@@ -3,6 +3,7 @@ Create and manage your own plant town. Users can add their own plants, customize
 ---
 
 ## Running the program 
+Set up PostgreSQL and pgAdmin4 locally.
 Type into your command line: 
 ```bash 
 git clone https://github.com/yenminh269/herbs-town.git
